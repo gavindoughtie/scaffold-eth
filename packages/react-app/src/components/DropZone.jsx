@@ -23,8 +23,6 @@ export default function DropZone({ keytext, uploadCallback }) {
     border: '3px solid blue',
     width: '200px',
     height: '200px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
   };
 
   return (

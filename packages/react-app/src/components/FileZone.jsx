@@ -16,17 +16,19 @@ export default function FileZone({ keytext }) {
     setDecrypted(new TextDecoder().decode(decryptedObj));
   }
 
-  console.log(`returning encrypted: ${encrypted}, decrypted: ${decrypted}`);
-
+  const preStyle = { fontSize: '8pt', textAlign: 'left' };
   return (
-    <div>
-      <h1>{JSON.stringify(encrypted)}</h1>
-      <h1>{decrypted}</h1>
+    <div style={{ align: 'left' }}>
       <DropZone uploadCallback={uploadCallback} keytext={keytext} />
-      <pre>{keytext}</pre>
+      <p style={preStyle}>{JSON.stringify(encrypted)}</p>
+      <h3>Key: </h3>
+      <p id="key_id" style={preStyle}>
+        {keytext}
+      </p>
       <button type="button" onClick={() => decryptResults(encrypted, keytext)}>
         Decrypt
       </button>
+      <p style={preStyle}>{decrypted}</p>
     </div>
   );
 }
