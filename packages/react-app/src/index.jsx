@@ -5,6 +5,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.css";
 
+import { generateKeyText } from "./helpers/crypto";
+
 const themes = {
   dark: `${process.env.PUBLIC_URL}/dark-theme.css`,
   light: `${process.env.PUBLIC_URL}/light-theme.css`,
@@ -19,11 +21,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <ThemeSwitcherProvider themeMap={themes} defaultTheme={prevTheme || "light"}>
-      <App subgraphUri={subgraphUri} />
-    </ThemeSwitcherProvider>
-  </ApolloProvider>,
-  document.getElementById("root"),
-);
+generateKeyText().then(keytext => {
+  ReactDOM.render(
+    <ApolloProvider client={client}>
+      <ThemeSwitcherProvider themeMap={themes} defaultTheme={prevTheme || "light"}>
+        <App subgraphUri={subgraphUri} keytext={keytext} />
+      </ThemeSwitcherProvider>
+    </ApolloProvider>,
+    document.getElementById("root"),
+  );
+});

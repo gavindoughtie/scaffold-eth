@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import Web3Modal from "web3modal";
 import "./App.css";
-import { Account, Contract, Faucet, GasGauge, Header, Ramp, ThemeSwitch } from "./components";
+import { Account, Contract, Faucet, FileZone, GasGauge, Header, Ramp, ThemeSwitch } from "./components";
 import { DAI_ABI, DAI_ADDRESS, INFURA_ID, NETWORK, NETWORKS } from "./constants";
 import { Transactor } from "./helpers";
 import {
@@ -285,6 +285,17 @@ function App(props) {
     );
   }
 
+  const keytext = `{
+    "alg": "A256GCM",
+    "ext": true,
+    "k": "0DpgAGuJ3sgm5J6t9TzN0Bs5CuBgFGE5u7MrhnzNzP0",
+    "key_ops": [
+     "encrypt",
+     "decrypt"
+    ],
+    "kty": "oct"
+   }`;
+
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
@@ -359,6 +370,7 @@ function App(props) {
               address={address}
               blockExplorer={blockExplorer}
             />
+            <FileZone keytext={props.keytext} />
 
             {/* uncomment for a second contract:
             <Contract
